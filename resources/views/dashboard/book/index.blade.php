@@ -7,17 +7,43 @@
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                 <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 flex justify-between">
                     <h5 class="mb-0 dark:text-white">Table book</h5>
-                    <div class="flex">
+                    <form action="{{ route('book.index') }}" method="get" class="flex items-center space-x-4">
+                        <div class="w-8/12">
+                            <label for="category_id" class="block text-gray-700">Category</label>
+                            <select name="category_id" id="category_id"
+                                class="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="" disabled {{ $request->category_id ? '' : 'selected' }}>-- Select
+                                    Category --</option>
+                                @foreach (\App\Models\Category::all() as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ $request->category_id == $item->id ? 'selected' : '' }}>
+                                        {{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="w-2/12 flex items-end space-x-2">
+                            <button type="submit"
+                                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                Filter
+                            </button>
+                            <a href="{{ route('book.index') }}"
+                                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:shadow-outline-gray active:bg-gray-400">
+                                Reset
+                            </a>
+                        </div>
+                    </form>
+                    <div class="flex items-center space-x-4">
                         <!-- Button Add book -->
                         <a href="{{ route('book.create') }}" type="button" data-tooltip-target="tooltip-addbook"
-                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center m-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add
-                            book</a>
+                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center m-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            Add book
+                        </a>
+                        <!-- End Button Add book -->
                         <div id="tooltip-addbook" role="tooltip"
                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                             Tambahkan Book
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                        <!-- End Button Add book -->
                     </div>
                 </div>
                 <div class="flex-auto px-0 pt-0 pb-2">
@@ -147,6 +173,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $books->links() }}
                 </div>
             </div>
             @include('dashboard.partials.footer')

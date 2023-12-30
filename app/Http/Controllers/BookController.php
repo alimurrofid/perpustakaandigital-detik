@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateBookRequest;
@@ -14,16 +15,24 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Hapus buku!';
         $text = "Apakah anda yakin ingin menghapus buku ini?";
         confirmDelete($title, $text);
-        // show all books by auth user except admin
-        return view('dashboard.book.index', [
-            'books' => (auth()->user()->role == 'admin') ? Book::all() : Book::where('user_id', auth()->user()->id)->get(),
-            'categories' => Category::all(),
-        ]);
+        
+        $books = Book::orderBy('id', 'desc')
+            ->with('category')
+            ->when(auth()->user()->role !== 'admin', function ($query) {
+                $query->where('user_id', auth()->user()->id);
+            })
+            ->when(request()->has('category_id'), function ($query) {
+                $query->where('category_id', request()->category_id);
+            })
+            ->paginate(10);
+        
+        return view('dashboard.book.index', compact('books','request'));
+        
     }
 
     /**
