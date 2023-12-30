@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id');
             $table->string('title')->unique();
             $table->string('description');
             $table->integer('amount');

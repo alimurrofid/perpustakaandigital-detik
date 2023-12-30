@@ -6,13 +6,13 @@
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
             sidenav-close></i>
         <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="#">
-            <img src="{{ asset('assets/images/logo-formadiksi.png') }}"
+            <img src="{{ asset('assets/images/book-logo.png') }}"
                 class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8"
                 alt="main_logo" />
-            <img src="{{ asset('assets/images/logo-formadiksi.png') }}"
+            <img src="{{ asset('assets/images/book-logo.png') }}"
                 class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8"
                 alt="main_logo" />
-            <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Pilketum Formadiksi</span>
+            <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Digital Library</span>
         </a>
     </div>
 
@@ -33,37 +33,27 @@
             </li>
 
             <li class="mt-0.5 w-full">
+                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ request()->routeIs('hope.index') ? 'font-semibold text-slate-700 rounded-lg bg-blue-500/13' : '' }}"
+                    href="{{ route('book.index') }}">
+                    <div
+                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
+                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-book-bookmark"></i>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Book</span>
+                </a>
+            </li>
+
+            <li class="mt-0.5 w-full">
                 <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ request()->routeIs('candidate.index', 'candidate.create', 'candidate.edit') ? 'font-semibold text-slate-700 rounded-lg bg-blue-500/13' : '' }}"
-                    href="{{ route('candidate.index') }}">
+                    href="{{ route('category.index') }}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-circle-08"></i>
+                        <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-books"></i>
                     </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Kandidat</span>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Category</span>
                 </a>
             </li>
 
-            <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ request()->routeIs('user.index') ? 'font-semibold text-slate-700 rounded-lg  bg-blue-500/13' : '' }}"
-                    href="{{ route('user.index') }}">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-single-02"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">User</span>
-                </a>
-            </li>
-
-            <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ request()->routeIs('hope.index') ? 'font-semibold text-slate-700 rounded-lg bg-blue-500/13' : '' }}"
-                    href="{{ route('hope.index') }}">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-send"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Hope</span>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="mx-4">
@@ -83,46 +73,10 @@
                 </div>
             </div>
         </div>
-        <!-- Button Start Voting  -->
-        @if ($VoteSession->session_run == 0)
-            <form action="{{ route('start-voting', $VoteSession->id) }}" method="post"
-                id="start-form-{{ $VoteSession->id }}">
-                @csrf
-                <button type="button" onclick="confirmStart({{ $VoteSession->id }})"
-                    data-tooltip-target="tooltip-start"
-                    class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in bg-green-600 rounded-lg shadow-md bg-150 hover:shadow-xs hover:-translate-y-px"><i
-                        class="pr-2 fa-solid fa-circle-play"></i>Start</button>
-                <div id="tooltip-start" role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Mulai Pemilihan
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-            </form>
-        @else
-            <form id="stop-form-{{ $VoteSession->id }}" action="{{ route('start-voting', $VoteSession->id) }}"
-                method="post">
-                @csrf
-                <button type="button" onclick="confirmStop({{ $VoteSession->id }})" data-tooltip-target="tooltip-stop"
-                    class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in bg-red-600 rounded-lg shadow-md bg-150 hover:shadow-xs hover:-translate-y-px"><i
-                        class="pr-2 fa-solid fa-circle-stop"></i>Stop</button>
-                <div id="tooltip-stop" role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Hentikan Pemilihan
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-            </form>
-        @endif
-        <!-- Button Countdown-->
-        <a href="{{ route('countdown') }}" target="_blank" data-tooltip-target="tooltip-countdown"
-            class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in bg-yellow-400 rounded-lg shadow-md bg-150 hover:shadow-xs hover:-translate-y-px"><i
-                class="pr-2 fa-solid fa-hourglass-start"></i>Countdown</a>
-        <div id="tooltip-countdown" role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Hitung Mundur Pemilihan
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
+
+
         <!-- Button Documentation-->
-        <a href="https://linktr.ee/FormadiksiMroyek" data-tooltip-target="tooltip-documentation" target="_blank"
+        <a href="" data-tooltip-target="tooltip-documentation"
             class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px">Documentation</a>
         <div id="tooltip-documentation" role="tooltip"
             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">

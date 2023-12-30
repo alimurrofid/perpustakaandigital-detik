@@ -19,8 +19,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="{{ asset('assets/images/logo-formadiksi.png') }} " type="image/png" />
-    <title>@yield('title') - Formadiksi Polinema</title>
+    <link rel="icon" href="{{ asset('assets/images/book-logo.png') }} " type="image/png" />
+    <title>@yield('title') - Digital Library</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -33,7 +33,6 @@
     <!-- Main Styling -->
     <link rel="stylesheet" href="{{ asset('assets/css/argon-dashboard-tailwind.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- CSS Libraries -->
@@ -65,55 +64,13 @@
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <!--  Sweet Alert  -->
     @include('sweetalert::alert')
-    <!-- plugin for charts  -->
-    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
     <!-- plugin for scrollbar  -->
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <!-- main script file  -->
     <script src="{{ asset('assets/js/argon-dashboard-tailwind.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables.js') }}"></script>
-    
-    <script>
-        let table = new DataTable("#datatable-search");
-    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmStart(id) {
-            Swal.fire({
-                title: 'Konfirmasi Start Voting',
-                text: 'Yakin Memulai Voting?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#008170',
-                cancelButtonColor: '#898B8A',
-                confirmButtonText: 'Start!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika pengguna mengklik "Ya, Hapus!", kirimkan permintaan penghapusan ke server
-                    document.getElementById('start-form-' + id).submit();
-                }
-            });
-        }
-        function confirmStop(id) {
-            Swal.fire({
-                title: 'Konfirmasi Stop Voting',
-                text: 'Yakin Menghentikan Voting?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#898B8A',
-                confirmButtonText: 'Stop!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika pengguna mengklik "Ya, Hapus!", kirimkan permintaan penghapusan ke server
-                    document.getElementById('stop-form-' + id).submit();
-                }
-            });
-        }
-    </script>
 
     <!-- JS Libraries -->
     @stack('customJS')
