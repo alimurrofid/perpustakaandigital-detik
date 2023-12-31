@@ -16,7 +16,7 @@
                                 <p
                                     class="mb-0 font-sans text-lg font-semibold leading-normal uppercase dark:text-white dark:opacity-60">
                                     Total Admin</p>
-                                <h5 class="text-4xl font-bold dark:text-white counter"></h5>
+                                <h5 class="text-4xl font-bold dark:text-white counter">{{$admin}}</h5>
                             </div>
                         </div>
                         <div class="px-3 text-right">
@@ -46,7 +46,7 @@
                                 <p
                                     class="mb-0 font-sans text-lg font-semibold leading-normal uppercase dark:text-white dark:opacity-60">
                                     Total users</p>
-                                <h5 class="text-4xl font-bold dark:text-white counter"></h5>
+                                <h5 class="text-4xl font-bold dark:text-white counter">{{$user}}</h5>
                             </div>
                         </div>
                         <div class="px-3 text-right">
@@ -77,13 +77,13 @@
                                 <p
                                     class="mb-0 font-sans text-lg font-semibold leading-normal uppercase dark:text-white dark:opacity-60">
                                     Total Book</p>
-                                <h5 class="text-4xl font-bold dark:text-white counter"></h5>
+                                <h5 class="text-4xl font-bold dark:text-white counter">{{$book}}</h5>
                             </div>
                         </div>
                         <div class="px-3 text-right">
                             <div
                                 class="inline-block w-16 h-16 text-center mt-1.5 rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                                <i class="relative text-3xl text-white fa-solid fa-gift top-3.5"></i>
+                                <i class="relative text-3xl text-white fa-solid fa-book top-3.5"></i>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 <p
                                     class="mb-0 font-sans text-lg font-semibold leading-normal uppercase dark:text-white dark:opacity-60">
                                     Total Category</p>
-                                <h5 class="text-4xl font-bold dark:text-white counter"></h5>
+                                <h5 class="text-4xl font-bold dark:text-white counter">{{$category}}</h5>
                             </div>
                         </div>
                         <div class="px-3 text-right">
