@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookExport;
 use App\Http\Requests\StoreBookRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateBookRequest;
@@ -161,4 +163,10 @@ class BookController extends Controller
             return redirect()->route('book.index');
         }
     }
+
+    public function export()
+    {
+        return Excel::download(new BookExport, 'book.xlsx');
+    }
+
 }

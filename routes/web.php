@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.home');
         Route::resource('book', BookController::class);
+        Route::get('export', [BookController::class, 'export'])->name('book.export');
         Route::resource('category', CategoryController::class);
     });
 });

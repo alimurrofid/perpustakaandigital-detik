@@ -11,7 +11,7 @@
                         <div class="w-8/12">
                             <label for="category_id" class="block text-gray-700">Category</label>
                             <select name="category_id" id="category_id"
-                                class="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                class="block w-full mt-1 border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="" disabled {{ $request->category_id ? '' : 'selected' }}>-- Select
                                     Category --</option>
                                 @foreach (\App\Models\Category::all() as $item)
@@ -21,21 +21,32 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="w-2/12 flex items-end space-x-2">
+                        <div class="flex items-end w-2/12 space-x-2">
                             <button type="submit"
-                                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                                 Filter
                             </button>
                             <a href="{{ route('book.index') }}"
-                                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:shadow-outline-gray active:bg-gray-400">
+                                class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:shadow-outline-gray active:bg-gray-400">
                                 Reset
                             </a>
                         </div>
                     </form>
                     <div class="flex items-center space-x-4">
+                        <!-- Button export book -->
+                        <a href="{{route('book.export')}}" type="button" data-tooltip-target="tooltip-exportbook"
+                            class="px-4 py-2 m-2 mb-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Export book
+                        </a>
+                        <!-- End Button export book -->
+                        <div id="tooltip-exportbook" role="tooltip"
+                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Export Excel Book
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
                         <!-- Button Add book -->
                         <a href="{{ route('book.create') }}" type="button" data-tooltip-target="tooltip-addbook"
-                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center m-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            class="px-4 py-2 m-2 mb-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             Add book
                         </a>
                         <!-- End Button Add book -->
